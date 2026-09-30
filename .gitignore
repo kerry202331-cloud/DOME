@@ -1,0 +1,4 @@
+# 同步脚本的运行日志，不必入库
+sync.log
+# macOS 杂物
+.DS_Store
