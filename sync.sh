@@ -1,7 +1,7 @@
 #!/bin/bash
 # DOME 文件夹自动同步脚本：检测改动 → 提交 → 推送到 GitHub
 REPO="/Users/xingyaqin/Documents/DOME"
-export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
+export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3"
 
 cd "$REPO" || { echo "$(date '+%H:%M:%S') ❌ 无法进入 $REPO"; exit 1; }
 
