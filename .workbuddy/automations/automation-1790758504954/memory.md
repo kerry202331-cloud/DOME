@@ -1898,3 +1898,8 @@
 ## 2026-10-29 15:08 (GMT+8)
 - 运行 `sync.sh`，提交并推送成功：`8bf8cec..0f9de3e  main -> main`，退出码 0。
 - 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
+
+## 2026-10-29 17:00 (GMT+8)
+- 顺带修复 `sync.sh`：GIT_SSH_COMMAND 增加 `ConnectTimeout=15`/`ServerAliveInterval=15`/`ServerAliveCountMax=3`，避免 `git push` 在网络瞬时卡死时无限挂起（此前 10-16、10-28 均因此挂起）。
+- 运行 `sync.sh`，提交并推送成功：`0f9de3e..4de197b  main -> main`，退出码 0。
+- 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
