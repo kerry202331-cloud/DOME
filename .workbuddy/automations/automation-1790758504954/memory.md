@@ -1,5 +1,10 @@
 # DOME 自动同步 — 执行记录
 
+## 2026-11-01 03:52 (GMT+8)
+- 运行 `sync.sh`，脚本输出 `❌ 推送失败`（client_loop: Broken pipe / send-pack: unexpected disconnect / remote end hung up）。
+- 触发 SSH/网络检查：SSH 认证 GitHub 正常（`Hi kerry202331-cloud!`）、HTTPS 返回 HTTP 200 → 密钥与网络本身无问题，判定为传输中途瞬时断连。
+- 手动补推（带 SSH 保活 ServerAliveInterval=20）报告 `Everything up-to-date`；核实本地 `ahead 0 / behind 0`，提交 `f738575` 已在 origin/main → 推送实际已成功，仅末段握手被掐断导致误报。已与用户简短通报，无遗留未推送提交。
+
 ## 2026-10-25 13:04 (GMT+8)
 - 运行 `sync.sh`，提交并推送成功：`3a9104c..a2b2631  main -> main`，退出码 0。
 - 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
