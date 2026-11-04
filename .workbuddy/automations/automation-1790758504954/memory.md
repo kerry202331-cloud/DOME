@@ -1,5 +1,9 @@
 # DOME 自动同步 — 执行记录
 
+## 2026-11-04 19:45 (GMT+8)
+- 运行 `sync.sh`，提交并推送成功：`dfef306..72c4ac2  main -> main`，退出码 0。
+- 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
+
 ## 2026-11-04 18:49 (GMT+8)
 - 运行 `sync.sh`：本地提交 `dfef306` 后推送首次失败——脚本输出 `❌ 推送失败`，底层 `git@github.com: Permission denied (publickey)`（GitHub 间歇性 publickey 拒绝，同一模式历史已多次出现）。
 - 触发检查：`~/.ssh` 配置/密钥正常（config 指向 id_ed25519，pub key 齐全）；`ssh -T git@github.com` 本次认证成功（`Hi kerry202331-cloud!`），判定为瞬时抖动而非本地凭据/网络故障。
