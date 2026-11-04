@@ -1,5 +1,11 @@
 # DOME 自动同步 — 执行记录
 
+## 2026-11-04 18:49 (GMT+8)
+- 运行 `sync.sh`：本地提交 `dfef306` 后推送首次失败——脚本输出 `❌ 推送失败`，底层 `git@github.com: Permission denied (publickey)`（GitHub 间歇性 publickey 拒绝，同一模式历史已多次出现）。
+- 触发检查：`~/.ssh` 配置/密钥正常（config 指向 id_ed25519，pub key 齐全）；`ssh -T git@github.com` 本次认证成功（`Hi kerry202331-cloud!`），判定为瞬时抖动而非本地凭据/网络故障。
+- 重试 `git push origin main` 成功：`f55d21a..dfef306  main -> main`，核实 `ahead 0 / behind 0`，仓库已同步。
+- 因触发 ❌ 规则，已简短告知用户并排查 SSH 与网络。
+
 ## 2026-11-04 17:47 (GMT+8)
 - 运行 `sync.sh`：本地提交 `f55d21a` 后推送首次失败——GitHub 返回 `remote: Internal Server Error`（HTTP 500，`remote rejected`），脚本输出含 ❌。
 - 触发 SSH/网络检查：`~/.ssh` 配置与 `id_ed25519` 正常（指纹 `SHA256:0FPT/...` 与 agent 一致）；但 `ssh -T git@github.com` 与后续 `git push` 呈**间歇性** `Permission denied (publickey)`（约 50% 成功率，同一 IP 20.205.243.166），强制 IPv4 亦如此 → 判定为 GitHub 服务端瞬时抖动，非本地凭据/网络故障。
