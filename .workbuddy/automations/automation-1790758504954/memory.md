@@ -1,5 +1,11 @@
 # DOME 自动同步 — 执行记录
 
+## 2026-11-04 17:47 (GMT+8)
+- 运行 `sync.sh`：本地提交 `f55d21a` 后推送首次失败——GitHub 返回 `remote: Internal Server Error`（HTTP 500，`remote rejected`），脚本输出含 ❌。
+- 触发 SSH/网络检查：`~/.ssh` 配置与 `id_ed25519` 正常（指纹 `SHA256:0FPT/...` 与 agent 一致）；但 `ssh -T git@github.com` 与后续 `git push` 呈**间歇性** `Permission denied (publickey)`（约 50% 成功率，同一 IP 20.205.243.166），强制 IPv4 亦如此 → 判定为 GitHub 服务端瞬时抖动，非本地凭据/网络故障。
+- 带 `IdentitiesOnly=yes` 重试，第 3 次成功：`bc2b09c..f55d21a  main -> main`，本地与远程已一致，无遗留未推送提交。
+- 因触发 ❌ 规则，已简短告知用户并排查 SSH 与网络。
+
 ## 2026-11-04 16:50 (GMT+8)
 - 运行 `sync.sh`，提交并推送成功：`1e0cf14..bc2b09c  main -> main`，退出码 0。
 - 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
