@@ -2404,3 +2404,8 @@
 ## 2026-11-03 04:54 (GMT+8)
 - 运行 `sync.sh`，提交并推送成功：`05846cf..f1b821b  main -> main`，退出码 0。
 - 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
+
+## 2026-11-06 00:03 (GMT+8)
+- 运行 `sync.sh` 首次推送被 GitHub 服务端拒绝：`remote: fatal error in commit_refs_rules`（⚠️ 非 SSH/网络问题，属瞬时/服务端钩子错误，历史中首次出现此类型）。
+- 排查：`~/.ssh` 配置与 `id_ed25519` 密钥正常；TCP22/HTTPS443/ssh -T 认证均正常（Hi kerry202331-cloud 认证成功），排除 SSH/网络故障。
+- 重试推送第 1 次成功：`7018592..0629fea main -> main`，本地与远程 0 ahead / 0 behind，最终同步成功。
