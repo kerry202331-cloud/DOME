@@ -2441,3 +2441,9 @@
 - 运行 `sync.sh` 首次推送被 GitHub 服务端拒绝：`remote: fatal error in commit_refs_rules`（⚠️ 非 SSH/网络问题，属瞬时/服务端钩子错误，历史中首次出现此类型）。
 - 排查：`~/.ssh` 配置与 `id_ed25519` 密钥正常；TCP22/HTTPS443/ssh -T 认证均正常（Hi kerry202331-cloud 认证成功），排除 SSH/网络故障。
 - 重试推送第 1 次成功：`7018592..0629fea main -> main`，本地与远程 0 ahead / 0 behind，最终同步成功。
+
+## 2026-11-06 11:26 (GMT+8)
+- 运行 `sync.sh`：本地提交后推送失败——脚本输出 `❌ 推送失败`，底层 `Connection to 20.205.243.166 port 22 timed out`（SSH 握手超时）。
+- 触发检查：`~/.ssh` 配置与 `id_ed25519` 密钥正常；`nc` 复测 TCP22 已通（端口开放）、但 `curl` HTTPS443 此刻超时 → 判定为 GitHub SSH 间歇性瞬时超时，非本地凭据故障。
+- 本地提交已保留（ahead 1 / behind 0）。带 `ServerAliveInterval=20` 补推成功：`3fd4702..f817907 main -> main`，核实本地与远程 0 ahead / 0 behind，仓库已同步。
+- 因触发 ❌ 规则，已简短告知用户并排查 SSH 与网络。
