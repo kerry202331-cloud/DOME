@@ -1,5 +1,11 @@
 # DOME 自动同步 — 执行记录
 
+## 2026-11-13 16:25 (GMT+8)
+- 运行 `sync.sh`：本地提交 `8826a76` 后推送超时失败——脚本输出 `❌ 推送失败`，底层 `Connection to 20.247.166.64 port 22 timed out`（SSH 握手超时）。
+- 触发 SSH/网络检查：`~/.ssh` 配置与 `id_ed25519` 正常；此时 `ssh -T git@github.com` 认证成功（`Hi kerry202331-cloud!`）、TCP 22 与 HTTPS 443 均通 → 判定为瞬时网络超时，非本地凭据/网络故障。
+- 重试 `git push origin main` 成功：`c89a3cb..8826a76  main -> main`，核实 `ahead 0 / behind 0`，仓库已同步。
+- 因触发 ❌ 规则，已简短告知用户并排查 SSH 与网络。
+
 ## 2026-11-13 15:29 (GMT+8)
 - 运行 `sync.sh`，提交并推送成功：`290669f..c89a3cb  main -> main`，退出码 0。
 - 无 ❌、无 SSH/网络错误，正常完成，未向用户汇报。
